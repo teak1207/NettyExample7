@@ -14,10 +14,12 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf in = (ByteBuf) msg;
-        System.out.println("Server received : " + in.toString(CharsetUtil.UTF_8));
+        //System.out.println("Server received : " + in.toString(CharsetUtil.UTF_8));
 
+         String str = in.toString(0,40 ,CharsetUtil.UTF_8);
+        System.out.println(str);
 
-        ctx.write(in); // 받은 메시지를 발신자에게로 Echo 시킨다.
+        //ctx.write(in); // 받은 메시지를 발신자에게로 Echo 시킨다.
     }
 
     @Override

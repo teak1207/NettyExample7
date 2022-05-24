@@ -10,16 +10,21 @@ import io.netty.util.CharsetUtil;
 @ChannelHandler.Sharable
 public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
-    byte[] arr = {'1', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2',};
-    String productName = "productName";
-    String productId = "productId";
-    String serialNumber = "serialNumber";
+      byte[] initDataArr = new byte[32]; // 초기화 데이터 담을 Byte [32] 선언
+    String productName = "productName"; // 제품명을 담을 변수
+    String productId = "productId"; // 제품 고유 아이디를 담을 변수
+    String serialNumber = "serialNumber"; // 제품 S/N 을 담을 변수
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
 //        ctx.writeAndFlush(Unpooled.copiedBuffer("채널 활성화 시 메시지 전송합니다", CharsetUtil.UTF_8)); // 채널 활성화 시 메시지 전송
-        ctx.writeAndFlush(Unpooled.copiedBuffer(arr));
-        ctx.writeAndFlush(Unpooled.copiedBuffer(productName + ' ', CharsetUtil.UTF_8));
+
+
+
+            initDataArr = new byte[]{'a', 'b', 'c', 'd', 'e'};
+
+        ctx.writeAndFlush(Unpooled.copiedBuffer(initDataArr));
+        ctx.writeAndFlush(Unpooled.copiedBuffer(" " + productName + ' ', CharsetUtil.UTF_8));
         ctx.writeAndFlush(Unpooled.copiedBuffer(productId + ' ', CharsetUtil.UTF_8));
         ctx.writeAndFlush(Unpooled.copiedBuffer(serialNumber, CharsetUtil.UTF_8));
     }
