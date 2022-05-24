@@ -18,8 +18,8 @@ public class EchoClient {
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();  // bootstrap 생성
-            b.group(group)  // 클라이언트 이벤트 처리할 EventLoopGroup을 지정.
-                    .channel(NioSocketChannel.class)    // 채널 유형 NIO 지정
+            b.group(group)  // 클라이언트 이벤트 처리할 EventLoopGroup을 지정. --> NIO 구현이 이용됨.
+                    .channel(NioSocketChannel.class)    // 채널 유형으로 NIO  전송 유형 중 하나를 지정
                     .remoteAddress(new InetSocketAddress(8888)) // 서버의 InetSocketAddress를 설정
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override

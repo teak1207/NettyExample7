@@ -10,9 +10,18 @@ import io.netty.util.CharsetUtil;
 @ChannelHandler.Sharable
 public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
+    byte[] arr = {'1', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2', '2',};
+    String productName = "productName";
+    String productId = "productId";
+    String serialNumber = "serialNumber";
+
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ctx.writeAndFlush(Unpooled.copiedBuffer("Netty Connect()", CharsetUtil.UTF_8)); // 채널 활성화 시 메시지 전송
+//        ctx.writeAndFlush(Unpooled.copiedBuffer("채널 활성화 시 메시지 전송합니다", CharsetUtil.UTF_8)); // 채널 활성화 시 메시지 전송
+        ctx.writeAndFlush(Unpooled.copiedBuffer(arr));
+        ctx.writeAndFlush(Unpooled.copiedBuffer(productName + ' ', CharsetUtil.UTF_8));
+        ctx.writeAndFlush(Unpooled.copiedBuffer(productId + ' ', CharsetUtil.UTF_8));
+        ctx.writeAndFlush(Unpooled.copiedBuffer(serialNumber, CharsetUtil.UTF_8));
     }
 
     @Override

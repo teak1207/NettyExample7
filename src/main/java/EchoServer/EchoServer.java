@@ -20,16 +20,15 @@ public class EchoServer {
     public static void main(String[] args) throws Exception {
         new EchoServer().start();   // 서버의 start() 메소드 호출
     }
-
     private void start() throws Exception {
         final EchoServerHandler serverHandler = new EchoServerHandler();
-        EventLoopGroup group = new NioEventLoopGroup(); // EventLoopGroup 생성
+        EventLoopGroup group = new NioEventLoopGroup(); // EventLoopGroup 생성, 새로운 연결을 수락 및 처리하도록 지정
         try {
             ServerBootstrap b = new ServerBootstrap();  // ServerBootstrap 생성
             b.group(group)
                     .channel(NioServerSocketChannel.class)  // NIO 전송채널을 이용하도록 지정
                     .localAddress(new InetSocketAddress(port))  // 지정된 포트로 소켓 주소 설정
-                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                    .childHandler(new ChannelInitializer<SocketChannel>() { // EchoServerHandler 하나를 채널의 channel pipeline으로 추가
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception { // EchoServerHandler 하나를 채널의 Channel Pipeline 으로 추가
                             ch.pipeline().addLast(serverHandler);
