@@ -16,7 +16,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
         ByteBuf in = (ByteBuf) msg;
         //System.out.println("Server received : " + in.toString(CharsetUtil.UTF_8));
 
-         String str = in.toString(0,40 ,CharsetUtil.UTF_8);
+        String str = in.toString(0, 40, CharsetUtil.UTF_8);
         System.out.println(str);
 
         //ctx.write(in); // 받은 메시지를 발신자에게로 Echo 시킨다.
