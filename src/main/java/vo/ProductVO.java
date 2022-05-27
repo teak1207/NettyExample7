@@ -18,7 +18,7 @@ public class ProductVO {
     private String sn;
     private int size;
     private String phonenum;
-    private Date regdate;
+    private String regdate;
 
 
 }
