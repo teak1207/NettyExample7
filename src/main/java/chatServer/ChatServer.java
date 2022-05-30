@@ -37,8 +37,10 @@ public class ChatServer {
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new ChatServerInitializer(sslCtx));
+            bootstrap.bind(port).sync().channel().closeFuture().sync();
         } finally {
-
+            bossGroup.shutdownGracefully();
+            workerGourp.shutdownGracefully();
         }
 
     }
